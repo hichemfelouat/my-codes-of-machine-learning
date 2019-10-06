@@ -1,9 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Sun Oct  6 16:13:29 2019
-
-@author: hichem
+@author: hichem felouat
 """
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
