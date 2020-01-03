@@ -5,8 +5,15 @@ from silx.opencl import sift
 import matplotlib.pyplot as plt
 from PIL import Image
 
+def Rot(image, angle):
+  image_center = tuple(np.array(image.shape[1::-1]) / 2)
+  rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
+  result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
+  return result
+
 data = datasets.fetch_olivetti_faces()
 img1 = data.images[0]
+#img2 = Rot(data.images[0], -90)
 img2 = cv2.rotate(data.images[0], cv2.ROTATE_90_CLOCKWISE)
 
 sift_ocl = sift.SiftPlan(template=img, devicetype="GPU")
