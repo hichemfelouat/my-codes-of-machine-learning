@@ -1,3 +1,6 @@
+# https://drive.google.com/file/d/1Si7mHErYN6O8ltEyVUtTMb-6jjIJfBGE/view?usp=sharing
+# https://www.tensorflow.org/tutorials/text/nmt_with_attention
+# https://machinetalk.org/2019/03/29/neural-machine-translation-with-attention-mechanism/
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
@@ -6,8 +9,8 @@ import numpy as np
 print("------------------------------------------------------------------------")
 # Load the data
 print("part 1 : Load the data \n")
-file_en = open("/content/gdrive/My Drive/hichem_data/NLP_dataset/small_vocab_en.txt","r")
-file_fr = open("/content/gdrive/My Drive/hichem_data/NLP_dataset/small_vocab_fr.txt","r")               
+file_en = open("small_vocab_en.txt","r")
+file_fr = open("small_vocab_fr.txt","r")               
 raw_data_en = file_en.readlines()
 raw_data_fr = file_fr.readlines()
 
@@ -18,8 +21,6 @@ for i in range(3):
 print("------------------------------------------------------------------------")
 # Add start and end
 print("Add start and end \n")
-# raw_data_fr_in  = ["<start> " + data for data in raw_data_fr]
-# raw_data_fr_out = [data + " <end>" for data in raw_data_fr]
 
 raw_data_fr_in  = ["start " + data for data in raw_data_fr]
 raw_data_fr_out = [data + " end" for data in raw_data_fr]
@@ -145,10 +146,6 @@ epochs    = 20
 encoder = Encoder(vocab_size_en, embedding_size, lstm_zize)
 decoder = Decoder(vocab_size_fr, embedding_size, lstm_zize)
 
-initial_states  = encoder.init_states(1)
-encoder_outputs = encoder(tf.constant([[1, 2, 3]]), initial_states)
-decoder_outputs = decoder(tf.constant([[1, 2, 3]]), encoder_outputs[1:])
-
 # ******************************************************************************
 def loss_func(targets, logits):
     crossentropy = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
@@ -163,8 +160,7 @@ def predict(test_source_text=None):
 
     print("Predict : ")
     print("test_source_text : \n",test_source_text)
-    test_source_seq = tokenizer_en.texts_to_sequences([test_source_text])
-    #print("test_source_seq : \n",test_source_seq)
+    test_source_seq = tokenizer_en.texts_to_sequences([test_source_text])  
     test_source_seq = reverse_squ(test_source_seq)
 
     en_initial_states = encoder.init_states(1)
