@@ -1,6 +1,5 @@
 # https://drive.google.com/file/d/1Si7mHErYN6O8ltEyVUtTMb-6jjIJfBGE/view?usp=sharing
-# https://www.tensorflow.org/tutorials/text/nmt_with_attention
-# https://machinetalk.org/2019/03/29/neural-machine-translation-with-attention-mechanism/
+
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
